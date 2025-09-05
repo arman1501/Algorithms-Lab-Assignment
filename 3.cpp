@@ -1,11 +1,11 @@
-//3. Write a code to run BFS on a bidirectional weighted graph using an Adjacency Matrix.
+// 3. Write a code to run BFS on a bidirectional weighted graph using an Adjacency Matrix.
 
 #include <bits/stdc++.h>
 using namespace std;
 
 int graph[1001][1001]; // adjacency matrix (weight stored)
 int visit[1001];       // visited array
-int n, e;        // number of nodes and edges
+int n, e;              // number of nodes and edges
 
 // Calling BFS void type function.
 void BFS(int start)

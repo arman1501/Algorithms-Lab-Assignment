@@ -1,52 +1,53 @@
-#include <bits/stdc++.h>
+// 4. Write a code to take a graph as input using a matrix and a list.
+#include <bits/stdc++.h> // All header file.
 using namespace std;
 
-int main()
+int main() // Main function use.
 {
-    int n, e; // n = number of nodes, e = number of edges
-    cin >> n >> e;
+    int node, edge;      // Define two variables.
+    cin >> node >> edge; // Input from users of two variables.
 
-    // Adjacency Matrix
-    int adjMatrix[1001][1001];               // declare matrix
-    memset(adjMatrix, 0, sizeof(adjMatrix)); // initialize all to 0
-
-
-    int u, v, w;
-    for (int i = 0; i < e; i++)
-    {
-        cin >> u >> v >> w;  // input edge u->v with weight w
-        adjMatrix[u][v] = w; // set weight
-        adjMatrix[v][u] = w; // bidirectional
-    }
-
-    // Print adjacency matrix
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-            cout << adjMatrix[i][j] << " ";
-        cout << endl;
-    }
+    // Adjacency Matrix.
+    int graph[node + 1][node + 1];
+    memset(graph, 0, sizeof(graph)); // Full matrix k 0 diye initialize korci.
 
     // Adjacency list.
-    vector<pair<int, int>> adjList[1001]; // each node stores pair {neighbor, weight}
+    vector<int> adjList[node + 1]; // Using vector for store neighbor node.
 
-    for (int i = 0; i < e; i++)
+    int u, v, w;                    // Define 3 variables.
+    for (int i = 1; i <= edge; i++) // Using for loop for input from users.
     {
         cin >> u >> v >> w;
-        adjList[u].push_back({v, w}); // add neighbor with weight
-        adjList[v].push_back({u, w}); // bidirectional
+
+        // Matrix update. Undirected weighted tai two side e weight bosate hbe.
+        graph[u][v] = w; // u -> v er weight.
+        graph[v][u] = w; // v -> u er weight
+
+        // List e sudhu neighbor node rakhci.
+        adjList[u].push_back(v); // u er neighbor v.
+        adjList[v].push_back(u); // v er neighbor u.
     }
 
-    // Print adjacency list
-    for (int i = 1; i <= n; i++)
+    for (int i = 1; i <= node; i++)
+    {
+        for (int j = 1; j <= node; j++)
+        {
+            cout << graph[i][j] << " "; // Print adjacency metrix.
+        }
+        cout << endl; // New line.
+    }
+
+    cout << endl;   // More space that's why use another new line for better output.
+
+    for (int i = 1; i <= node; i++)
     {
         cout << i << " -> ";
-        for (auto edge : adjList[i])
+        for (int j = 0; j < (int)adjList[i].size(); j++)
         {
-            cout << "(" << edge.first << "," << edge.second << ") ";
+            cout << adjList[i][j] << " "; // Print adjacency list.
         }
-        cout << endl;
+        cout << endl; // New line.
     }
 
-    return 0;
+    return 0; // Program end.
 }
